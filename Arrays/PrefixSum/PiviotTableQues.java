@@ -9,7 +9,6 @@ public class PiviotTableQues {
 
     public static int findMiddleIndex(int[] nums) {
         int n=nums.length;
-        //
         int psLeft[]=new int[n];
         int psRight[]=new int[n];
 
