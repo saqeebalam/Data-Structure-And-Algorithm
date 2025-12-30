@@ -1,4 +1,7 @@
 public class PiviotTableQues {
+
+    //LeetCode 724
+    //URL: https://leetcode.com/problems/find-pivot-index/description/
     public static void main(String[] args) {
         int arr[]={2,3,-1,8,4};
         System.out.println(findMiddleIndex(arr));
