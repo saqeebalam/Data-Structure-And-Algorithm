@@ -17,6 +17,8 @@ public class TreeTraversal {
         node.right=new TreeNode(20);
         node.left.left=new TreeNode(3);
         node.left.right=new TreeNode(8);
+        //node.right.left=new TreeNode(15);
+        //node.right.right=new TreeNode(25);
 
         TreeNode temp=node;
         System.out.println("PreOrder Traversal");
@@ -33,6 +35,20 @@ public class TreeTraversal {
         System.out.println("\nLevelOrder Traversal");
         TreeNode tempLevl=node;
         new TreeTraversal().levelOrderTravers(tempLevl);
+
+        TreeNode tempCnt=node;
+        System.out.println("\nCount Number of Node in A tree: "+new TreeTraversal().countNodeInTree(tempCnt));
+
+        TreeNode tempLvl=node;
+        System.out.println("\nCount Number of Node in A tree using Level order: "+new TreeTraversal().countNodeInTreeIter(tempLvl));
+
+        TreeNode tempLeafCnt=node;
+        System.out.println("\nCount Number of Leaf Node in A tree: "+new TreeTraversal().countLeafNode(tempLeafCnt));
+
+        TreeNode tempInternalCnt=node;
+        System.out.println("\nCount Number of Internal Node in A tree: "+new TreeTraversal().countInternalNode(tempInternalCnt));
+
+        
     }
 
     /* PreOrder Traversal= root -> left -> right
@@ -104,4 +120,71 @@ public class TreeTraversal {
            }
         }
    }
+
+   /* Count total number of nodes in a tree
+    T.C=O(n)
+    S.C=O(h)
+   */
+
+   public int countNodeInTree(TreeNode node ){
+     if(node==null){
+        return 0;
+     }   
+     return 1+countNodeInTree(node.left)+countNodeInTree(node.right);
+   }
+
+   /* Count using Level order iterative way 
+    T.C=O(n)
+    S.C=O(n)
+   */
+
+   public int countNodeInTreeIter(TreeNode node){
+    int count=0;
+
+    Queue<TreeNode>q = new LinkedList<>();
+
+    q.add(node);
+
+    while (!q.isEmpty()) {
+        TreeNode n=q.poll();
+        count++;
+
+        if(n.left!=null){
+            q.add(n.left);
+        }
+        
+        if(n.right!=null){
+            q.add(n.right);
+        }
+    }
+
+    return count;
+   }
+
+
+   /* Count Leave node . Leaf node are those node which did not have any children */
+   public int countLeafNode(TreeNode node){
+    if(node == null){
+        return 0;
+    }
+
+    if(node.left == null && node.right == null){
+        return 1;
+    }
+    return countLeafNode(node.left)+countLeafNode(node.right);
+   }
+
+    /* Count Internal node . Internal node are those node which have at least one child */
+   public int countInternalNode(TreeNode node){
+    if(node==null){
+        return 0;
+    }
+    
+    if(node.left == null && node.right == null){
+        return 0;
+    }
+    return 1+countInternalNode(node.left)+countInternalNode(node.right);
+   }
+
+   //Note one more trick : Internal Nodes = Total Nodes − Leaf Nodes OR Vice Versa
 }
