@@ -34,7 +34,7 @@ public class BinarySearchTree {
             return new TreeNode(val);
         }
 
-        if(val<node.val){
+        if(val<=node.val){
             node.left=insertBst(node.left, val);
         }
 
